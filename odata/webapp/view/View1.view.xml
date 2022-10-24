@@ -12,7 +12,7 @@
         <f:title>
             <f:DynamicPageTitle >
                 <f:heading>
-                    <Title text="flexible columns layout master view"/>
+                    <Title text="하우스 키퍼"/>
                 </f:heading>
             </f:DynamicPageTitle>
         </f:title>
@@ -163,10 +163,11 @@
                                  >
                                     <!-- <core:Item key="{Main>Condx}" text="{Main>Condx}" /> -->
                                     
-                                    <core:Item key="이용중" text="이용중" />
-                                    <core:Item key="청소필요" text="청소필요" />    
-                                    <core:Item key="청소완료" text="청소완료" />
-                            
+                                        <core:Item key="이용중" text="이용중" />
+                                        <core:Item key="청소필요" text="청소필요" />    
+                                        <core:Item key="청소완료" text="청소완료" />
+
+
                                 </Select>
                             </InputListItem>
                         </cells>
