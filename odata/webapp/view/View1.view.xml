@@ -8,7 +8,7 @@
     xmlns:svm="sap.ui.comp.smartvariants"
 >
 
-    <f:DynamicPage headerExpanded="{/headerExpanded}" toggleHeaderOnTitleClick="false">
+    <f:DynamicPage id="dynamicpage" headerExpanded="{/headerExpanded}" toggleHeaderOnTitleClick="false">
         <f:title>
             <f:DynamicPageTitle>
                 <f:heading>
@@ -24,7 +24,7 @@
                     persistencyKey="myPersKey"
                     useToolbar="false"
                     search=".onSearch"
-                    filterChange=".onFilterChange">
+                    showFilterConfiguration="false">
                     <fb:filterItems>
                         <fb:FilterItem name="Plant" label="지점코드">
                             <fb:control>
@@ -87,6 +87,29 @@
                             </fb:control>
                         </fb:FilterItem>
 
+                        <fb:FilterItem name="Condx" label="방상태">
+                            <fb:control>
+                                <ComboBox
+                                    id="CondxInput"
+                                    selectedKey="{Main>/sSearchCondx}"
+                                    placeholder="방상태를 입력하세요."
+                                    showSecondaryValues="true">
+                                    
+                                    <items>
+                                      
+                                        <core:ListItem key="이용중" text="이용가능" />
+                                        <core:ListItem key="청소필요" text="청소필요" />
+                                        <core:ListItem key="청소완료" text="청소완료" />
+                                        <core:ListItem key="시설점검필요" text="시설점검필요" />                             
+                                        <core:ListItem key="시설점검완료" text="시설점검완료" />
+               
+                                    </items>
+                                </ComboBox>
+                            </fb:control>
+                        </fb:FilterItem>
+
+
+
                         <fb:FilterItem name="Roomid" label="Room 번호">
                             <fb:control>
                                 <Input
@@ -105,7 +128,6 @@
                         <Button text="저장" press="onPressSave" width="100px" type="Emphasized" />
                     </contentRight>
                 </Bar>
-
 
                 <Table
                     id="RoomTable"
@@ -163,10 +185,11 @@
                                     >
                                         <!-- <core:Item key="{Main>Condx}" text="{Main>Condx}" /> -->
 
-                                        <core:Item key="이용중" text="이용중" />
+                                        <core:Item key="이용중" text="이용가능" />
                                         <core:Item key="청소필요" text="청소필요" />
                                         <core:Item key="청소완료" text="청소완료" />
-
+                                        <core:Item key="시설점검필요" text="시설점검필요" />                             
+                                        <core:Item key="시설점검완료" text="시설점검완료" />
 
                                     </Select>
                                 </InputListItem>

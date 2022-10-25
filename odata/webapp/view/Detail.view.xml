@@ -18,12 +18,9 @@
         <headerTitle>
 
             <ObjectPageDynamicHeaderTitle>
-
                 <expandedHeading>
                     <m:Title text="{app>/detail/Roomno}" wrapping="true" />
                 </expandedHeading>
-
-
             </ObjectPageDynamicHeaderTitle>
         </headerTitle>
 
@@ -42,22 +39,21 @@
                     <m:ObjectStatus title="층 수" text="{app>/detail/Floor}" />
                     <m:ObjectStatus title="룸 id" text="{app>/detail/Roomid}" />
                     <m:ObjectStatus title="방 호수" text="{app>/detail/Roomno}" />
-                    <m:ObjectStatus title="현재 방 상태" text="{app>/detail/Roomtp}" />
+                    <m:ObjectStatus title="현재 방 상태" text="{app>/detail/Condx}" />
                 </layout:VerticalLayout>
             </m:FlexBox>
         </headerContent>
 
         <sections>
-
-
             <ObjectPageSection title="필요물품 리스트">
                 <subSections>
                     <ObjectPageSubSection>
                         <blocks>
-
                             <m:Table
                                 id="mTable"
-                                items="{all>/filterMTable}">
+                                items="{all>/filterMTable}"
+                                mode="MultiSelect"
+                                >
                                 <m:columns>
                                     <m:Column>
                                         <m:Text text="객실타입" />

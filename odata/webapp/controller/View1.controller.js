@@ -25,6 +25,7 @@ sap.ui.define(
           sSearchPlant: null,
           sSearchRoomid: null,
           sSearchFloor: null,
+          sSearchCondx: null,
           sSearchRoomtp: null, // 방상태 필터용
           vPlant: null, //   지점
           vFloor: null, //   층
@@ -43,7 +44,7 @@ sap.ui.define(
         var oModel = this.getView().getModel();
         var oViewModel = this.getView().getModel("Main");
 
-        oModel.read("/RoomHouseKeeperSet", {
+        oModel.read("/RoomHouseManagerSet", {
           success: function (oModelData) {
             var data = oModelData;
             var aData = data.results;
@@ -51,9 +52,10 @@ sap.ui.define(
 
             oData.push(aData);
             oViewModel.setProperty("/oTableData", aData);
+            
           },
         });
-
+        
         var oModel2 = this.getView().getModel(); // 물품 oData 연결 
         var oViewModel2 = this.getView().getModel("all");
 
@@ -70,11 +72,15 @@ sap.ui.define(
       },
 
       onSearch: function () {
+
+        this.getView().byId("dynamicpage").setHeaderExpanded(false);
         // 필터 함수
         var oViewModel = this.getView().getModel("Main");
         var sSearchPlant = oViewModel.getProperty("/sSearchPlant"); //지점번호
         var sSearchFloor = oViewModel.getProperty("/sSearchFloor"); //층수
         var sSearchRoomid = oViewModel.getProperty("/sSearchRoomid"); //룸id
+        var sSearchCondx = oViewModel.getProperty("/sSearchCondx"); //룸id
+
 
         var oTable = this.getView().byId("RoomTable");
         var oBinding = oTable.getBinding("items");
@@ -113,7 +119,20 @@ sap.ui.define(
           aFilter.push(oFilter);
         }
 
+        if (sSearchCondx) {
+          // 현재방상태  변경! 
+          var oFilter = new Filter({
+            path: "Condx",
+            operator: FilterOperator.Contains,
+            value1: sSearchCondx,
+            caseSensitive: false,
+          });
+          aFilter.push(oFilter);
+        }
+
         oBinding.filter(aFilter);
+
+        
       },
 
       onPressSave: function (oEvent) {
@@ -188,8 +207,9 @@ sap.ui.define(
 
         // 추출된 데이터를 filterMTable이라는 속성에 데이터를 저장한다.
         oAllModel.setProperty("/filterMTable", aFilterData);
-
         oFCL.setLayout(library.LayoutType.TwoColumnsBeginExpanded);
+        
+
       },
     });
   }
